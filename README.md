@@ -2,7 +2,8 @@
 
 A cross-platform desktop application built with Electron, React 19, and the TanStack ecosystem. This modern stack provides a robust foundation for building performant desktop applications with a beautiful UI.
 
-![App Screenshot](resources/icon.png)
+<img width="900" alt="image" src="https://github.com/user-attachments/assets/1c142933-d2f3-4a6d-8f19-f10e6c147a52" />
+
 
 ## Features
 
