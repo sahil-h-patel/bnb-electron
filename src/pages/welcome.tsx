@@ -1,6 +1,6 @@
-import bnbLogo from '../assets/bnb.png'
+import bnbLogo from '../assets/bnb.svg'
 import { Button } from '../components/ui/button'
-import tapIcon from '../assets/tap.png'
+import tapIcon from '../assets/tap.svg'
 import { Link } from 'react-router'
 import { useUser } from '@/context/UserContext'
 

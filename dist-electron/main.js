@@ -18,7 +18,7 @@ function createWindow() {
     },
     width: 1024,
     height: 600,
-    resizable: false
+    resizable: true
   });
   app.whenReady().then(() => {
     globalShortcut.register("CommandOrControl+K", () => {

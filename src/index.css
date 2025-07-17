@@ -5,8 +5,7 @@
 @tailwind utilities;
 
 html,
-body,
-:root {
+body{
   @apply w-full h-full;
 
   @media (prefers-color-scheme: dark) {
