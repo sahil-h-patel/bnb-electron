@@ -1,21 +1,26 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, globalShortcut, Menu } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { createIPCHandler } from 'electron-trpc/main'
+import { router } from '@main/api'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1024,
+    height: 600,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
-    }
+    },
+    frame: false,
+    resizable: true
   })
+  createIPCHandler({ router, windows: [mainWindow] })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -70,5 +75,14 @@ app.on('window-all-closed', () => {
   }
 })
 
+app.whenReady().then(() => {
+  globalShortcut.register('CommandOrControl+K', () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow()
+    if (focusedWindow) {
+      focusedWindow.webContents.openDevTools()
+    }
+  })
+  Menu.setApplicationMenu(Menu.buildFromTemplate([]))
+})
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.

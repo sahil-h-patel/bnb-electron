@@ -11,16 +11,56 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as DashboardLayoutImport } from './routes/dashboard/layout'
+import { Route as TareImport } from './routes/tare'
+import { Route as ReceiptImport } from './routes/receipt'
+import { Route as NameImport } from './routes/name'
+import { Route as InfoImport } from './routes/info'
+import { Route as CloseDoorsImport } from './routes/close-doors'
+import { Route as CartImport } from './routes/cart'
+import { Route as AdminImport } from './routes/admin'
 import { Route as IndexImport } from './routes/index'
-import { Route as SettingsIndexImport } from './routes/settings/index'
-import { Route as DashboardIndexImport } from './routes/dashboard/index'
 
 // Create/Update Routes
 
-const DashboardLayoutRoute = DashboardLayoutImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const TareRoute = TareImport.update({
+  id: '/tare',
+  path: '/tare',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ReceiptRoute = ReceiptImport.update({
+  id: '/receipt',
+  path: '/receipt',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const NameRoute = NameImport.update({
+  id: '/name',
+  path: '/name',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const InfoRoute = InfoImport.update({
+  id: '/info',
+  path: '/info',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CloseDoorsRoute = CloseDoorsImport.update({
+  id: '/close-doors',
+  path: '/close-doors',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CartRoute = CartImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AdminRoute = AdminImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -28,18 +68,6 @@ const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
-} as any)
-
-const SettingsIndexRoute = SettingsIndexImport.update({
-  id: '/settings/',
-  path: '/settings/',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const DashboardIndexRoute = DashboardIndexImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => DashboardLayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -53,25 +81,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardLayoutImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminImport
       parentRoute: typeof rootRoute
     }
-    '/dashboard/': {
-      id: '/dashboard/'
-      path: '/'
-      fullPath: '/dashboard/'
-      preLoaderRoute: typeof DashboardIndexImport
-      parentRoute: typeof DashboardLayoutImport
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartImport
+      parentRoute: typeof rootRoute
     }
-    '/settings/': {
-      id: '/settings/'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsIndexImport
+    '/close-doors': {
+      id: '/close-doors'
+      path: '/close-doors'
+      fullPath: '/close-doors'
+      preLoaderRoute: typeof CloseDoorsImport
+      parentRoute: typeof rootRoute
+    }
+    '/info': {
+      id: '/info'
+      path: '/info'
+      fullPath: '/info'
+      preLoaderRoute: typeof InfoImport
+      parentRoute: typeof rootRoute
+    }
+    '/name': {
+      id: '/name'
+      path: '/name'
+      fullPath: '/name'
+      preLoaderRoute: typeof NameImport
+      parentRoute: typeof rootRoute
+    }
+    '/receipt': {
+      id: '/receipt'
+      path: '/receipt'
+      fullPath: '/receipt'
+      preLoaderRoute: typeof ReceiptImport
+      parentRoute: typeof rootRoute
+    }
+    '/tare': {
+      id: '/tare'
+      path: '/tare'
+      fullPath: '/tare'
+      preLoaderRoute: typeof TareImport
       parentRoute: typeof rootRoute
     }
   }
@@ -79,58 +135,94 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-interface DashboardLayoutRouteChildren {
-  DashboardIndexRoute: typeof DashboardIndexRoute
-}
-
-const DashboardLayoutRouteChildren: DashboardLayoutRouteChildren = {
-  DashboardIndexRoute: DashboardIndexRoute,
-}
-
-const DashboardLayoutRouteWithChildren = DashboardLayoutRoute._addFileChildren(
-  DashboardLayoutRouteChildren,
-)
-
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardLayoutRouteWithChildren
-  '/dashboard/': typeof DashboardIndexRoute
-  '/settings': typeof SettingsIndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
+  '/close-doors': typeof CloseDoorsRoute
+  '/info': typeof InfoRoute
+  '/name': typeof NameRoute
+  '/receipt': typeof ReceiptRoute
+  '/tare': typeof TareRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardIndexRoute
-  '/settings': typeof SettingsIndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
+  '/close-doors': typeof CloseDoorsRoute
+  '/info': typeof InfoRoute
+  '/name': typeof NameRoute
+  '/receipt': typeof ReceiptRoute
+  '/tare': typeof TareRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardLayoutRouteWithChildren
-  '/dashboard/': typeof DashboardIndexRoute
-  '/settings/': typeof SettingsIndexRoute
+  '/admin': typeof AdminRoute
+  '/cart': typeof CartRoute
+  '/close-doors': typeof CloseDoorsRoute
+  '/info': typeof InfoRoute
+  '/name': typeof NameRoute
+  '/receipt': typeof ReceiptRoute
+  '/tare': typeof TareRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/dashboard/' | '/settings'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/close-doors'
+    | '/info'
+    | '/name'
+    | '/receipt'
+    | '/tare'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/settings'
-  id: '__root__' | '/' | '/dashboard' | '/dashboard/' | '/settings/'
+  to:
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/close-doors'
+    | '/info'
+    | '/name'
+    | '/receipt'
+    | '/tare'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/cart'
+    | '/close-doors'
+    | '/info'
+    | '/name'
+    | '/receipt'
+    | '/tare'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardLayoutRoute: typeof DashboardLayoutRouteWithChildren
-  SettingsIndexRoute: typeof SettingsIndexRoute
+  AdminRoute: typeof AdminRoute
+  CartRoute: typeof CartRoute
+  CloseDoorsRoute: typeof CloseDoorsRoute
+  InfoRoute: typeof InfoRoute
+  NameRoute: typeof NameRoute
+  ReceiptRoute: typeof ReceiptRoute
+  TareRoute: typeof TareRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardLayoutRoute: DashboardLayoutRouteWithChildren,
-  SettingsIndexRoute: SettingsIndexRoute,
+  AdminRoute: AdminRoute,
+  CartRoute: CartRoute,
+  CloseDoorsRoute: CloseDoorsRoute,
+  InfoRoute: InfoRoute,
+  NameRoute: NameRoute,
+  ReceiptRoute: ReceiptRoute,
+  TareRoute: TareRoute,
 }
 
 export const routeTree = rootRoute
@@ -144,25 +236,38 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/dashboard",
-        "/settings/"
+        "/admin",
+        "/cart",
+        "/close-doors",
+        "/info",
+        "/name",
+        "/receipt",
+        "/tare"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/dashboard": {
-      "filePath": "dashboard/layout.tsx",
-      "children": [
-        "/dashboard/"
-      ]
+    "/admin": {
+      "filePath": "admin.tsx"
     },
-    "/dashboard/": {
-      "filePath": "dashboard/index.tsx",
-      "parent": "/dashboard"
+    "/cart": {
+      "filePath": "cart.tsx"
     },
-    "/settings/": {
-      "filePath": "settings/index.tsx"
+    "/close-doors": {
+      "filePath": "close-doors.tsx"
+    },
+    "/info": {
+      "filePath": "info.tsx"
+    },
+    "/name": {
+      "filePath": "name.tsx"
+    },
+    "/receipt": {
+      "filePath": "receipt.tsx"
+    },
+    "/tare": {
+      "filePath": "tare.tsx"
     }
   }
 }
